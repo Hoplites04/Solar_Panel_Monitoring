@@ -1,0 +1,99 @@
+@{
+    ViewData["Title"] = "Chart Page";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Sheet Table (A to AI Columns)</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 5px;
+            text-align: center;
+        }
+        th.column-header {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+        td.row-index {
+            background-color: #f9f9f9;
+            font-weight: bold;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+</head>
+<body>
+
+<h2>Google Sheet Data Table (A to AI Columns)</h2>
+
+<table id="sheetTable"></table>
+
+<script>
+    const csvData = `@ViewBag.CsvData`;
+
+    const table = document.getElementById('sheetTable');
+
+    const parsed = Papa.parse(csvData.trim(), {
+        skipEmptyLines: true
+    });
+
+    const data = parsed.data;
+
+    const maxColumns = 200;  // A to AI
+    const columnLetters = [];
+
+    function getColumnLabel(n) {
+        let label = '';
+        while (n >= 0) {
+            label = String.fromCharCode((n % 26) + 65) + label;
+            n = Math.floor(n / 26) - 1;
+        }
+        return label;
+    }
+
+    for (let i = 0; i < maxColumns; i++) {
+        columnLetters.push(getColumnLabel(i));  // A, B, ..., Z, AA, AB, ..., AI
+    }
+
+    // Build header row with column letters
+    const headerRow = document.createElement('tr');
+    const emptyCorner = document.createElement('th');
+    emptyCorner.textContent = '';  // Empty top-left corner
+    headerRow.appendChild(emptyCorner);
+
+    columnLetters.forEach(letter => {
+        const th = document.createElement('th');
+        th.textContent = letter;
+        th.className = 'column-header';
+        headerRow.appendChild(th);
+    });
+
+    table.appendChild(headerRow);
+
+    // Build table rows (limit to first 14 rows)
+    const maxRows = 14;
+
+    data.slice(0, maxRows).forEach((row, rowIndex) => {
+        const tr = document.createElement('tr');
+
+        const rowIndexCell = document.createElement('td');
+        rowIndexCell.textContent = rowIndex + 1;
+        rowIndexCell.className = 'row-index';
+        tr.appendChild(rowIndexCell);
+
+        for (let i = 0; i < maxColumns; i++) {
+            const td = document.createElement('td');
+            td.textContent = row[i] ?? '';
+            tr.appendChild(td);
+        }
+
+        table.appendChild(tr);
+    });
+</script>
+
+</body>
+</html>

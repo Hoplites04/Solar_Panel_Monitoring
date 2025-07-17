@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Coding D\\Solar Control\\Frontend\\WebApplication1\\WebApplication1.csproj": {}
+    "D:\\Coding D\\Solar\\Frontend\\WebApplication1\\WebApplication1.csproj": {}
   },
   "projects": {
-    "D:\\Coding D\\Solar Control\\Frontend\\WebApplication1\\WebApplication1.csproj": {
+    "D:\\Coding D\\Solar\\Frontend\\WebApplication1\\WebApplication1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Coding D\\Solar Control\\Frontend\\WebApplication1\\WebApplication1.csproj",
+        "projectUniqueName": "D:\\Coding D\\Solar\\Frontend\\WebApplication1\\WebApplication1.csproj",
         "projectName": "WebApplication1",
-        "projectPath": "D:\\Coding D\\Solar Control\\Frontend\\WebApplication1\\WebApplication1.csproj",
+        "projectPath": "D:\\Coding D\\Solar\\Frontend\\WebApplication1\\WebApplication1.csproj",
         "packagesPath": "C:\\Users\\chien\\.nuget\\packages\\",
-        "outputPath": "D:\\Coding D\\Solar Control\\Frontend\\WebApplication1\\obj\\",
+        "outputPath": "D:\\Coding D\\Solar\\Frontend\\WebApplication1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chien\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -43,6 +43,16 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[9.0.7, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[8.0.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
